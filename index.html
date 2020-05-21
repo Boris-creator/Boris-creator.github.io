@@ -1,749 +1,103 @@
 <!DOCTYPE html>
-<html lang="ru-RU">
-  <head>
-    <!-- ;-) -->
-    <meta charset=utf-8>
-    <!--<meta name="description" content="Ваш путеводитель по учебной и научной литературе.
-Нашли ошибку в книге? Здесь Вы найдете полную информацию об опечатках и ошибках в учебниках
-и монографиях, и сможете выложить найденные Вами опечатки. Скачивайте книги без регистрации
-и обсуждайте их, публикуйте свои мысли!">-->
-    <!--<meta name="yandex-verification" content="2451447ac596ba91" />-->
-    <link href="https://fonts.googleapis.com/css?family=Lora|Rubik&display=swap" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">-->
-    <!--<meta name="google-site-verification" content="MgTQnIEwO9pX5xC_aZ5XdUre40qmyYY_XhXZHpmctE0" />-->
-    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico">
-    <title>
-      Главная страница
-    </title>
-    <style>
-      #hr {
-        height:4px;
-        color:#000000;
-        background-color:#000000;
-      }
-      body{
-        width:100%;
-        margin-left:0%;
-        min-width:1000px;
-        font-size:20px;
-      }
-      #header{
-        /*width:102%; margin-left:-1%;*/ background-image: url(http://boris-creator.github.io/logotype.png);
-        background-position: 46% 50%;
-        background-size:150%;
-        height:250px;
-      }
-      nav{
-        margin-left:2%;
-        margin-right:17px;
-        margin-top:15px;
-        background-color:#CCEEFF;
-        border-width:3px;
-        border-color:#AADDEE;
-        border-top-left-radius:.5em;
-        border-bottom-right-radius:.5em;
-        border-style:outset;
-        padding:25px;
-        width:36%;
-        line-height:1.25em;
-        
-      }
-      nav a{
-        text-decoration:none;
-        background-color:white;}
-      nav ul li{
-        background-color:white;
-        padding:0;
-        border-left:0.3em solid #0a3754;
-      }
-      nav p{
-        padding:0.5em;
-        padding-left:2em;
-      }
-      nav h3{
-        font-family: 'Roboto Mono', monospace;
-        font-size:1.1em;
-      }
-      section{
-        position:relative;
-        width:50%;
-        margin-left:2%;
-        margin-top:15px;
-        text-align:center;
-        border:1px solid #55CCFF;
-        padding:8px;
-        font-size:0.83em;
-        font-weight:bold;
-        background-color:#FEFEFF;
-        border-style:inset;
-        border-width:2px;
-        border-color:#D4D4B4}
-      section p{
-        font-size:1.2em;
-        line-height:1.4em;
-        font-family: 'Rubik', sans-serif;
-        text-align:justify;
-        text-align-last:center;
-        padding:0.5em;
-      }
-      section span{
-        color:#0055FB;
-      }
-      footer{
-        background-color:#EFF6FD;
-        border-top:2px solid #44CCFF;
-        margin-top:100px;
-        text-align:center;
-        padding:30px 30px 30px 90px}
-      footer a{
-        color:#555555;
-      }
-      li{
-        list-style-type:circle;
-      }
-      #Hr{
-        height:15px;
-        background-color:#0a3754;
-        color:#4455cc;
-      }
-      #anons{
-        width:100%;
-        text-align:center;
-        color:#0a3754;
-        font-size:1.1em;
-        background-image:url("images/library.jpeg");
-        background-position:center;
-        background-size:cover;
-        background-repeat:no-repeat;
-      }
-      #anons p{
-        width:80%;
-        margin-left:10%;
-      }
-      #ul{
-        display:flex;
-        justify-content:space-around;
-        align-items:center;
-        height:100%;
-        }
-      #ul div{
-        text-align:center;
-        padding:20px;
-        width:40%;
-        height:100%;
-        border:thin solid #77eeff;
-        background-color:white;
-        /*border-bottom:2px solid white; border-right:1px solid white;*/
-      }
-      #ul  a h4{
-        text-align:center;
-        color:#44ccff;
-        font-size:1.3em;
-        padding:10px;
-        border:2px solid #44ccff;
-        border-radius:5px;
-      }
-      .mobile_menu{
-        /*position:sticky; top:0; left:75%;*/position:absolute;
-        right:0;
-        z-index:1;
-        margin-top:-75px;
-        width:25%;
-        /*font-size:4em; color:#4455cc;*/}
-      .mobile_menu svg{
-        width:100%;
-        height:100%;
-      }
-      canvas{
-        width:25%;
-        margin-left:74%;
-      }
-      #searcher{
-        height:10%;
-        width:39%;
-        display:flex;
-        border:2px solid #0c3956;
-      }
-      #propilaeum{
-        display:flex;
-        align-items:center;
-        justify-content:center;
-      }
-      #propilaeum p{
-        width:60%;
-        text-align:right;
-        padding-right:8%;
-      }
-      #hid{
-        /*visibility:hidden;*/ width:90%;
-        display:flex;
-        flex-direction:column;
-      }
-      @media (min-device-width:400px) and (max-device-width:800px){
-      #propilaeum{
-        flex-direction:column;
-      }
-      #propilaeum p{
-        width:95%;
-        font-size:1.5em;
-        text-align:center;
-      }
-      #searcher{
-        width:95%;
-      }
-      #searcher textarea{
-        height:100px;
-      }
-    }
-      /*-------------------------------------
-      search                        
-      ------------------------------*/
-      #search_results{
-        display:none;
-        position:fixed;
-        z-index:3;
-        top:100px;
-        left:10%;
-        width:80%;
-        height:400px;
-        overflow:scroll;
-        padding:5%;
-        border-top-right-radius:5%;
-        background-color:rgba(250, 250, 255, 0.9);
-      }
-      #search_results a {
-        text-decoration:none;
-      }
-      form{
-        display:flex;
-        flex-direction:row;
-        align-items:center;
-        justify-content:space-around;
-        width:80;
-      }
-      form textarea{
-        width:80%;
-        border-radius:0;
-        border:1px solid #aaaaaa;
-      }
-      .selected{
-        color:#00dd00;
-        text-decoration:underline;
-      }
-      .result{
-        padding:5%;
-        border:1px solid #00ccff;
-      }
-    </style>
-  </head>
-  <body>
-    <!--LiveInternet counter-->
-    <!--<script type="text/javascript">
-      new Image().src = "//counter.yadro.ru/hit?r"+ escape(document.referrer)+((typeof(screen)=="undefined")?"": ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth? screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+ ";h"+escape(document.title.substring(0,150))+ ";"+Math.random();
-    </script>-->
-    <!--/LiveInternet-->
-    <div id="header">
-      <h1 style="text-align: center; position: relative; margin-top: 0%; font-family:'Noto Serif', serif; font-size:250%; font-weight:bolder">
-        &nbsp;
-      </h1>
-      <img style="position: relative; margin-top:-4%" src="http://boris-creator.github.io/logo.png" height=95 width=133 alt="логотип">
-      <canvas>
-      </canvas>
-    </div>
-    <hr id="hr">
-    <div style="/*border-left:5px solid #0a3754*/">
-      <h2 id="wellcome" style="text-align:center; color:#4455CC">
-        &nbsp;
-      </h2>
-      <p id="hi" style="text-align:center; background-color:#EFF5FB; line-height:150%; font-size:1em; font-family: 'Roboto Mono', monospace">
-        Мой сайт предназначен для всех интересующихся математикой,
-        <br>
-        естествознанием и историей науки.
-        <br>
-        Он должен служить для Вас проводником
-        в мире учебной и научной литературы,
-        <br>
-        изданной и издающейся 
-        на русском и английском языках.
-      </p>
-      <div id="propilaeum">
-        <p style="/*width:60%; padding-right:8%; text-align:right;*/ color:#0055FB; font-size:1.1em">
-          Здесь Вы найдете подробные сведения обо всех когда-либо 
-          выходивших изданиях 
-          <!--<br>-->интересующей Вас книги,
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>BrookyTest</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body style=" margin: 0 auto; background: url(art/Textur.jpg);">
+  <div id="wrapper" style="max-width: 900px; /*Нам точно нужна максимальная ширина?*/
+  margin-left: auto;
+  margin-right: auto;/*Задали максимальную ширину и отступы: блок всегда будет располагаться по центру*/">
+    <div class="header" style="
+    background: rgba(242, 245, 58, 0.1);
+    display:flex;                   /*все блоки внутри .header выстроятся в ряд, в одну линию, как ячейки в строке таблицы*/
+    justify-content:space-between;  /*При этом блоки равномерно растянутся на всю ширину хедера, место, оставшееся свободным, распределится в промежутках между ними. Правда, в моём коде свободного места и не осталось: первому блоку я задал ширину 85%, второму 15%, что в сумме 100%*/
+    padding-bottom:1em;             /*Чтобы текст не прилипал к низу блока, Вы использовали переносы строки: <br>, а логичнее просто задать отступ.*/">
+    <div id="he1" style="width:85%">         <!--Заголовок теста и вопрос обернул в div с шириной 85%; они идут вместе. Если бы я этого не сделал, то span оказался бы не под заголовком, а на одной линии с ним, между ним и картинкой-->
+        <h2 id="he11" style=" font-size:150%; color: #0083bd; text-shadow: #5dc8e5 0 0 10px; /*это Ваши стили :)*/">
+          тест: Примет ли тебя Европа? </h2> <br><br>
+        <span id="he12" style=" font-size: 110%; color: rgb(7, 7, 7); font-weight: bold; "> 
+          2 Какую сумму достаточно накопить/взять с собой ? </span> 
+      </div>
+      <!--картинку тоже обернём в свой блок, чтобы было проще её масштабировать (если этого не сделать, то внутри хедера с display:flex у картинки нарушатся пропорции: её сожмёт как резиновую-->
+      <div id="logo" style="width:15%"> <a href="ver.php"> 
+        <img src="art/Eyes_right.png" title="	&#169; Лео Брук, &#9993; legion5slov@ya.ru" style="width:100%"></a>
+      </div>
+    </div>  <!--Блока шапки конец-->
+            <!--Блока средний    -->
+    <div  class="middle" style="background: rgba(243, 178, 58, 0.13);">
+      <span id="mi1"    style="font-size:80%; color: #800000;"> 
+        &#128161; Можно выбать один или несколько ответов. <br> 
+        &#128161; Держите телефон горизонтально. <!--надо сверстать всё так, чтобы не приходилось держать телефон горизонтально :) Тем более, вдруг у меня ноутбук?..-->
+      </span>
+      <div id="mi2" style=" font-size:100%; color: rgb(0, 0, 0); /*Этот блок непонятно зачем
+      line-height: 2em;                       /*Лучше в em укажем, чем в процентах.*/
+      font-weight: 500;
+      font-stretch: 100%;
+      letter-spacing: 1px;
+      hyphens: auto;
+      text-align: left;
+      word-spacing: 100%; 
+      font-kerning: auto;  
+      /*text-indent: 15%;">
+        <form name="feedback" method="POST" action="2.php" style="">
+          <div id="mi21" style="                /*Это блок с картинкой и вариантами ответов.*/ 
+          background-size:45%;                  /*Размеры изображения: у меня сейчас ширина картиники составляет 45% от ширины блока, и соответсвенно фоновое изображение покрывает 45% блока; можете задавать в строчке выше разные процентные значения и смотреть, как лучше.*/
+          background-image:url('art/Money.png');/*Картинка всё равно выполняет чито декоративную роль!*/
+          background-repeat:no-repeat;          /*обычно если картинка-фон меньше по размерам блока, то браузер попытается полностью 'замостить' ей блок, повторяя её снова и снова. В нашем случае это неприемлемо: картинка не должна повторяться, поэтому запрещаю её повторять, задав background-repeat:no-repeat */
+          background-position:center right;     /*также надо указать положение фоновой картинки. для тонкой настройки это можно сделать в процентах, но нам достачно сказать, чтобы картинка помещалась у правого края блока, располагалась на середине его высоты.*/
+          ">
+          <div id="mi211" style="               /*Этот блок — обёртка для группы чекбоксов с вариантами ответов.*/ 
+          width:75%; padding-right:4%;          
+          /*background-image:linear-gradient(90deg, rgba(255, 255, 240, 0) 30%, rgba(255, 255, 220, 0.7) 80%)/* ">
+          <!--//*Вот, фоновая картинка занимает всегда 45% среднего блока, 
+          а ширину этого блока можно регулировать. Как только ширина блока становится больше 100-45 = 55% 
+          процентов, текст начинает перекрывать картинку. Изменяя ширину, тем самым будем 
+          регулировать глубину проникновения текста в картинку. Но тут возникает другая проблема: 
+          видите: чёрный текст на фоне картинки очень плохо читается...*/ 
+          /*Тут уж надо смотреть взглядом дизайнера. Чтобы решить эту проблему, предлагаю 
+          задать в качестве фона для формы градиент: с прозрачного переход на тёплый полупрозрачный. 
+          В градиенте, заданном ниже, точка концентрации прозрачного цвета установлена на 30% ширины блока, 
+          белого полупрозрачного — на 80%. Между 30% и 80% браузер рисует плавный переход. Если сближать 
+          две эти точки, то переход станет менее плавным.*/ 
+            *см. также https://codepen.io/Berners-Lee/pen/KKdroEq?editors=1100 [потом всё это удалим, когда верстка 
+          на сайт перенесётся]*/-->
+          <p><input type="checkbox" name="leo_ch[0]" value="Leo" /><span>В размере месячного оклада представителя среднего класса</span></p>
+          <p><input type="checkbox" name="leo_ch[1]" value="Leo" /><span>В размере официального прожиточного минимума</span></p>
+          <p><input type="checkbox" name="leo_ch[2]" value="Leo" /><span>Двойную стоимость месячной аренды жилья + 1000Е/человека</span></p>
+          <p><input type="checkbox" name="leo_ch[3]" value="Leo" /><span>10 000 Е</span></p>
+          <p><input type="checkbox" name="leo_ch[4]" value="Leo"/><span>Денег можно не брать. В Европе большие пособия по безработице</span><br></p>
           <br>
-          а также списки опечаток к каждому изданию, которые, надеюсь, 
-          упростят Вам чтение.
-        </p>
-        <!--<p style="font-size:29px; background-color:/*#4455CC*/#0a3754; color:white; padding-top:9px; padding-bottom:14px; text-align:center">Большую часть обсуждаемых книг Вы можете легко скачать на нашем сайте!</p> -->
-        <div id="searcher">
-          <!--поиск-->
-          <div id="hid">
-            <!--Copy&Paste-->
-            <!--<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;https://yandex.ru/search/site/&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:12,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;ru&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Поиск по сайту&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;ru&quot;,&quot;type&quot;:3,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2377846,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Яндекс Поиск&quot;,&quot;input_placeholderColor&quot;:&quot;#000000&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}">
-              <form action="https://yandex.ru/search/site/" method="get" target="_self" accept-charset="utf-8">
-                <input type="hidden" name="searchid" value="2377846"/>
-                <input type="hidden" name="l10n" value="ru"/>
-                <input type="hidden" name="reqenc" value=""/>
-                <input type="search" name="text" value=""/>
-                <input type="submit" value="Найти"/>
-              </form>
-            </div>-->
-            <!--<style type="text/css">
-              .ya-page_js_yes .ya-site-form_inited_no {
-                display: none;
-              }
-            </style>
-            <script type="text/javascript">
-              (function(w,d,c){
-                var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;
-                if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){
-                  e.className+=' ya-page_js_yes';
-                }
-                s.type='text/javascript';
-                s.async=true;
-                s.charset='utf-8';
-                s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';
-                h.parentNode.insertBefore(s,h);
-                (w[c]||(w[c]=[])).push(function(){
-                  Ya.Site.Form.init()}
-                                      )}
-              )(window,document,'yandex_site_callbacks');
-            </script>-->
-            <!--end of Copy&Paste-->
-            <form name="search" style="height:1em; font-size:2em">
-              <textarea name="question" placeholder="Введите запрос!" rows="1" style="border-top:0.3em solid silver">
-              </textarea>
-              <p onclick="multiSeek()" style="color:#feffff; height:1em; width:20%; padding-left:3%; background-color:#aaaaaa;">
-                <!--Искать--> 
-                <svg viewbox="0, 0, 80, 80" preserveAspectRatio="xMinYMin meet" style="background-color:silver; height:1em">
-                  <circle r="20" cx="32" cy="32" stroke="white" stroke-width="4" fill="transparent" />
-                  <line x1="51" y1="42" x2="71" y2="56" stroke-width="4" stroke="white" />
-                </svg>
-                <!--&#128269;  -->        
-                <!--<svg  viewBox="0, 0, 500, 500" preserveAspectRatio="xMinYMin meet"><circle r="40" cx="45" cy="25" stroke="white" stroke-width="4" fill="transparent" /><line x1="45" y1="35" x2="100" y2="80" stroke-width="4" stroke="white" /></svg>-->
-              </p>
-            </form>
-            <span>
-            </span>
           </div>
-          <div style="width:10%; background-color:#0c3956">
-            <!--<svg width="60" height="60"><circle r="20" cx="25" cy="25" stroke="white" stroke-width="4" fill="transparent" />
-<line x1="45" y1="35" x2="100" y2="80" stroke-width="4" stroke="white" /></svg>-->
-          </div>
-        </div>
-      </div>
-      <div id="search_results">
-        <p style="position:fixed; top:100px; left:86%; color:blue; font-size:2em" id="close">
-          X
-        </p>
-        <div>
-          <h2>
-            В заголовках первого уровня:
-          </h2>
-          <div id="h1">
-          </div>
-          <h2>
-            В заголовках второго уровня:
-          </h2>
-          <div id="h2">
-          </div>
-          <h2>
-            Во всём тексте:
-          </h2>
-          <div id="body">
-          </div>
-          <div id="counter">
-          </div>
-        </div>
-        <div>
-          Найденные совпадения:
-          <div id="results">
-          </div>
-        </div>
+            </div>   <!--Это конец блока с картинкой и вариантами ответа.-->
+                    <!--Вот здесь уже можно закончить форму, но подсказка семантически тоже относится к форме [?]-->
+      <!-- === и подсказка ===-->
+      <div id="spoiler" style="display:none"> &#128276; $H4[$nq]</div>
+      <button title="Закрыть/открыть" type="button" 
+        style="border-radius:0.6em; color:#800000; background-color:#fefecc; border:0.2em solid #800000" 
+        onclick="if(document.getElementById('spoiler') .style.display=='none')
+        {document.getElementById('spoiler')
+        .style.display=''}else{document.getElementById('spoiler')
+        .style.display='none'}">Подсказка &#8597;
+      </button>
+        </form>
       </div>
     </div>
-    <p style="font-size:29px; background-color:/*#4455CC*/#0a3754; color:white; padding-top:9px; padding-bottom:14px; text-align:center">
-      Большую часть обсуждаемых книг Вы можете легко скачать на нашем сайте!
-    </p>
-    <div>
-      <!--липкий контейнер-->
-      <div id="mobile">
-      </div>
-      <div style="background-color:/*#AFCFDE*//*#86BCC9*/#E6E8F0; /*border-left:5px solid #0a3754; border-right:5px solid #0a3754; border-bottom:2px solid #4455cc;*/ padding-bottom:30px">
-        <!--background-color:#F9FBFF--> 
-        <hr>
-        <div style="display:flex; overflow:hidden; width:100%; position:relative">
-          <section>
-            <div>
-              <h2>
-                Студентам и преподавателям
-              </h2>
-              <p>
-                В наше время в Сети существует множество библиотек — ресурсов, 
-                позволяющих скачать едва ли не любую интересующую вас книгу. Обычно мы уходим с таких 
-                сайтов в тот момент, когда файл скачан...
-                <!--<br> ...--> и остаемся с книгой один на один. 
-                <br>
-                Мы поставили целью создание ресурса, который бы помог вам сориентироваться в разных изданиях&nbsp;
-                той или иной книги, позволил воспользоваться опытом других читателей, предоставил информацию,&nbsp;
-                которая была бы полезна для преодоления трудностей, возникающих при работе с книгой и 
-                связанных с нестандартной терминологией, неточностями, опечатками и фактическими ошибками,&nbsp;
-                допущенными авторами и издателями. Также мы предполагаем размещать здесь указания
-                <br>
-                &nbsp; к задачам
-                &nbsp;из учебников.
-                <br>
-                <span>
-                  Большую часть обсуждаемых книг вы сможете найти здесь же (и скачать без регистрации).
-                </span>
-              </p>
-            </div>
-            <div style="position:absolute; bottom:0.5em; left:3%;  width:92%; padding:10px; border-top:1px solid black; border-right:1px solid black; font-size:0.9em; background-color:#CCEEFF">
-              <h2 style="color:#4455DD">
-                Дорогие друзья!
-              </h2>
-              <p style="text-align:center">
-                Человек должен доверять своему разуму.
-                <br>
-                Если вы нашли ошибку или опечатку в книге, 
-                <br>
-                сообщите об этом здесь!
-              </p>
-            </div>
-          </section>
-          <nav>
-            <h3>
-              Математика
-            </h3>
-            <ul>
-              <li>
-                <a href="http://g90433t8.beget.tech/algebra.html">
-                  <p>
-                    Общая алгебра
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a href="http://g90433t8.beget.tech/teorver.html">
-                  <p>
-                    Теория вероятностей и математическая статистика
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a href="http://g90433t8.beget.tech/matan.html">
-                  <p>
-                    Математический анализ
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a href="http://g90433t8.beget.tech/topology.html">
-                  <p>
-                    Общая топология
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a href="http://g90433t8.beget.tech/encyclop.html">
-                  <p>
-                    Энциклопедические материалы
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a href="http://g90433t8.beget.tech/geometry.html">
-                  <p>
-                    Varia
-                  </p>
-                </a>
-              </li>
-            </ul>
-            <h3>
-              Науки биологического цикла
-            </h3>
-            <h3>
-              История естествознания
-            </h3>
-            <ul>
-              <li>
-                <a href="http://g90433t8.beget.tech/lomonosov.html">
-                  <p>
-                    &nbsp;&nbsp;Ломоносовиана
-                  </p>
-                </a>
-              </li>
-            </ul>
-            <h3>
-              Сайтостроение
-            </h3>
-            <ul>
-              <li>
-                <a href="http://g90433t8.beget.tech/bad_web-design.html">
-                  <p>
-                    &nbsp;&nbsp;Фронтенд
-                  </p>
-                </a>
-              </li>
-            </ul>
-            <h3>
-              Универсальные энциклопедии
-            </h3>
-            <ul>
-              <li>
-                <a href="http://g90433t8.beget.tech/esbe.html">
-                  <p>
-                    &nbsp;&nbsp;Брокгауз — Ефрон
-                  </p>
-                </a>
-              </li>
-              <!--Эта страничка уже создается!-->
-            </ul>
-            <h3>
-              Научно-популярные журналы
-            </h3>
-          </nav>
-        </div>
-        <!--конец липкого контейнера-->
-      </div>
-      <div style="text-align:center;border:2px solid #0a3754; margin-left:30px; margin-right:20px; margin-top:50px; padding: 1em 1em 1em 1em;
-/*border-top-left-radius:0.5em; border-top-right-radius:.5em;*/ background-color:white">
-  <div style="transform:skewx(-10deg); border: 1px solid black; border-radius:10px;
-width:400px; margin-left:28px; background-image:linear-gradient(#e4e4ef, #c0c0cb); margin-top:-3em">
-  <h3 style="transform:skewx(10deg); font-family:'Roboto Mono', monospace;">
-    Постоянные рубрики
-  </h3>
+    <div class="footer" style=" 
+    background: rgba(242, 245, 58, 0.1); 
+    display: flex;  
+    justify-content: flex-end;"> 
+ <!-- все картинки выстроились в одну линию; этого можно было бы и не делать, но задав display:flex, 
+      мы получаем дополнительные возможности позиционирования. Вот одна из этих возможностей: все дочерние элементы 
+      (в нашем случае — картинки) сгруппировались у правого конца блока. Если бы задали justify-content:center , 
+      то сгруппировались бы посередине.-->
+      <a href="0.php"> <img height="70" src="art/Nav_b.png" title="Назад"></a>
+      <a href="0.php"> <img height="70" src="art/Navi1.png" title="Прогресс"></a>
+      <button style=" background: transparent; border: none;">
+        <img height="70" src="art/Nav_f.png" title="Вперед">
+      </button>
   </div>
-  <div id="ul">
-    <div>
-      <a href="http://g90433t8.beget.tech/zt.html" style="color:#44ccff; text-decoration:none">
-        <h4>
-          «Зело темно»
-        </h4>
-      </a>
-      <p>
-        (Неточные, бессмысленные, полуосмысленные высказывания разных авторов на разные темы).
-      </p>
-    </div>
-    <div style="">
-      <a href="http://g90433t8.beget.tech/bookshelf.html" style="text-decoration:none">
-        <h4>
-          Книжная полка 
-          <span style="text-decoration:underline">
-            | / | | \ || |/ | //| |\
-          </span>
-        </h4>
-      </a>
-      <p>
-        (Материалы по истории математики и естествознания)
-      </p>
-    </div>
-  </div>
-      </div>
-    </div>
-    <hr id="Hr">
-    <div id="anons">
-      <div style="background:rgba(250, 250, 250, 0.8); padding-bottom:50px">
-        <h3>
-          Дорогие посетители,
-        </h3>
-        <p>
-          Сайт продолжает наполняться материалами. 
-          <br>
-          В ближайшее время
-          будет значительно обновлён раздел, посвящённый Энциклопедическому словарю Брокгауза — Ефрона; появятся оригинальные материалы, относящиеся к
-          второму изданию «Большой медицинской энциклопедии», журналу «Наука и жизнь».
-          <br>
-          Заходите ещё, и вы их увидите!
-          <br>
-          Новые страницы уже в верстке!
-        </p>
-        <p style="color:white; /*background-image:linear-gradient(90deg, transparent, #0a3754, transparent)*/ background-color:#0a3754; padding:15px; border-radius:4px; width:70%; margin-left:15%">
-          Теперь Вы также можете оставлять на сайте сообщения.
-          &nbsp;
-          <a href="http://g90433t8.beget.tech/algebra.html#disqus_thread" style="text-decoration:none; background-color:#66ff66; padding:3px; border-radius:3px">
-            Поделитесь
-          </a>
-          &nbsp;своими соображениями о книге, которую Вы читаете сейчас!
-        </p>
-      </div>
-    </div>
-    <div>
-      <footer>
-        <h3>
-          Любые Ваши замечания и предложения по усовершенствованию сайта
-          <br>
-          большая просьба отправлять 
-          <a href="mailto:BK.youngmath@icloud.com?subject=Предложение&nbsp;по&nbsp;улучшению&nbsp;сайта">
-            на мою почту:
-          </a>
-          <br>
-          BK.youngmath@icloud.com
-        </h3>
-        <hr>
-        <p>
-          Сайт основан в 2019 году. &copy; 2019 — 2020.
-        </p>
-        <div style="color:#999999">
-          <!--LiveInternet logo-->
-          <!--<a href="//www.liveinternet.ru/click" target="_blank">
-<img src="//counter.yadro.ru/logo?27.19" title="LiveInternet: показано количество просмотров и посетителей" alt="" border="0" width="88" height="120"/></a>-->
-          <!--/LiveInternet-->
-          <div style="padding-bottom:30px">
-            Полезные ссылки: 
-            <a href="http://dxdy.ru">
-              Научный форум
-            </a>
-          </div>
-          <!--<details><summary>Полезные ссылки</summary><a href="http://dxdy.ru/">Пообщаться и изменить свою жизнь</a>
-<br><a href="http://vote2019.appspot.com/">Изменить жизнь вокруг себя</a></details>-->
-          <a href="http://antivirus-alarm.ru/proverka/?url=g90433t8.beget.tech%2F">
-            <img src="http://antivirus-alarm.ru/images/checked_v1.gif" width="88" height="31" title="Результаты антивирусного сканирования" />
-          </a>
-          <a href="https://webmaster.yandex.ru/sqi?host=g90433t8.beget.tech">
-            <img width=88 height=31 alt="" border="0" src="https://yandex.ru/cycounter?g90433t8.beget.tech&theme=light&lang=ru"/>
-          </a>
-          <a href="http://jigsaw.w3.org/css-validator/check/referer">
-            <img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Правильный CSS!" />
-          </a>
-        </div>
-      </footer>
-    </div>
-    <script>
-      const well=document.getElementById("wellcome");
-      let i=0;
-      function printy(){
-        if(i<=24){
-          well.insertAdjacentHTML('beforeend', 'Приветствую Вас на сайте!'.split("")[i])};
-        i++};
-      function pechatay(){
-        setInterval(printy, 300)};
-      setTimeout(pechatay, 1500);
-      const hi=document.getElementById("hi");
-      let j=0;
-      function slide (){
-        setTimeout(function(){
-          requestAnimationFrame(slide);
-          hi.style.backgroundImage="linear-gradient("+110+j*2+"deg, #EFF5FB "+j*1.5+"%,"+" "+"rgb(170, 187, 238), rgb("+/*(168-j)*/Math.min(68, j)+", "+j*2.5+", "+104+j+"), #AABBEE, #EFF5FB)";
-          if(j<100){
-            j++};
-        }
-                   , 50)};
-      setTimeout(slide, 1000)
-    </script>
-    <script>
-      const nav=document.querySelector("nav");
-      const section=document.querySelector("section");
-      const mobile=document.getElementById("mobile")
-      if(window.screen.width<=800){
-        section.style.width="95%";
-        nav.style.marginRight="-50%";
-        /*section.marginTop="80px";*/
-        document.getElementById("ul").style.fontSize="1.5em";
-        document.getElementById("ul").style.flexDirection="column";
-        for(let div of Array.from(document.querySelectorAll("#ul div"))){
-          div.style.width="90%";
-        };
-        mobile.className="mobile_menu";
-        mobile.innerHTML="<svg><circle cx='100' cy='80' r='80' stroke='white' stroke-width='20' fill='#0a3754' /><text x='70' y='100' fill='white' font-size='100'>+</text></svg>";
-        let counter=1;
-        function open_menu(){
-          section.style.marginLeft=counter%2*-100+"%";
-          nav.style.width=counter%2*100+"%";
-          document.querySelector("#mobile svg text").style.transform="rotate("+counter%2*45+"deg)";
-          counter++};
-        document.querySelector(".mobile_menu").addEventListener("click", open_menu);
-      }
-    </script>
-    <script>
-      // поиск по сайту. В этот скрипте много лишнего — я несколько раз латал его. Надо переписать начисто.
-      const container=document.getElementById("search_results");
-      const counter=document.getElementById("counter");
-      const first_div=document.getElementById("h1");
-      const second_div=document.getElementById("h2");
-      const third_div=document.getElementById("body");
-      const results=document.getElementById("results");
-      const pages=["http://g90433t8.beget.tech/topology.html",
-                   "http://g90433t8.beget.tech/matan.html", 
-                   "http://g90433t8.beget.tech/algebra.html", 
-                   "http://g90433t8.beget.tech/teorver.html",
-                   "http://g90433t8.beget.tech/encyclop.html",
-                   "http://g90433t8.beget.tech/esbe.html",
-                   "http://g90433t8.beget.tech/lomonosov.html",
-                   "http://g90433t8.beget.tech/index.html",
-                   "http://g90433t8.beget.tech/bad_web-design.html"];
-      const titles=["Топология", "Анализ", "Алгебра", "Теорвер", "Математические энциклопедии", "Брокгауз — Ефрон", "Ломоносовиана", "Домашняя страница", "Сайтостроение"];
-      function cut(string, n){
-        return string.replace(string.slice(n), " ")};
-      function commentsAway(text){
-        return text.replace(/-->/g, "£").replace(/<!--[^£]+?£/g, "")};
-      function deTag(text){
-        return text.replace(/<\/script>/g, "€").replace(/(<head>[^]+<\/head>|<script[^€]+?€)/g, "").replace(/<[^<]+>/g, "").replace(/&[^;]+(p|;)/g, "")};
-      function spaceOff(str){
-        if(str[str.length-1]==' '){
-          return str.substr(0, str.length-1)}
-        else {
-          return str}
-      };
-      //с found как-то криво получилось...
-      function seek(){
-        let found=0;
-        first_div.innerHTML=" ";
-        second_div.innerHTML=" ";
-        third_div.innerHTML=" ";
-        results.innerHTML=" ";
-        document.querySelector("#hid span").innerHTML="";
-        let len=spaceOff(search.question.value).length;
-        var simpleReg=new RegExp(" "+spaceOff(search.question.value), "i");
-        var reg=new RegExp("~[^£]+?"+spaceOff(search.question.value), "i");
-        if(search.question.value.length>=3){
-          for (let page of pages){
-            fetch(page)
-            .then(resp=>resp.text())
-            .then((text)=>{
-                  container.style.display="flex"; text=commentsAway(text);
-            if(reg.exec(text.replace(/<h1[^>]+?>/g, "~").replace(/<\/h1>/g, "£"))){
-              found++;
-              first_div.insertAdjacentHTML("beforeend", "<p><a href='"+page+"'>"+titles[pages.indexOf(page)]+"</a></p>");
-            };
-            if(reg.exec(text.replace(/<h2[^>]+?>/g, "~").replace(/<\/h2>/g, "£"))){
-              found++;
-              second_div.insertAdjacentHTML("beforeend", "<p><a href='"+page+"'>"+titles[pages.indexOf(page)]+"</a></p>");
-            };
-            if(simpleReg.exec(deTag(text))){
-              /*const ex=simpleReg.exec(deTag(text)); */
-              let textik=deTag(text);
-              while(simpleReg.exec(textik))
-              {
-                results.insertAdjacentHTML("beforeend", "<h2><a href='"+page+"'>"+titles[pages.indexOf(page)]+"</a></h2>"+
-                  "<br><p class='result'>..."+cut(textik.slice(simpleReg.exec(textik).index-45), 45)+"<span class='selected'>"+/*search.question.value*/simpleReg.source+"</span>"+cut(textik.slice(simpleReg.exec(textik).index+len+1), 45)+"...</p>");
-                textik=textik.slice(Math.max(simpleReg.exec(textik).index, 1)+simpleReg.source.length-1);
-              }
-              found++;
-              third_div.insertAdjacentHTML("beforeend", "<p><a href='"+page+"'>"+titles[pages.indexOf(page)]+"</a></p>")};
-            counter.innerHTML=" ";
-            counter.insertAdjacentHTML("beforeend", "нашлось текстов с частичными совпадениями: "+found)}
-          )};
-      }
-      /*else if(search.question.value.length<3) {document.querySelector("#hid span").innerHTML="<b>Извините, запрос слишком уж короткий!</b>"}*/};
-      //новая функция. Паразитирует на старой.
-      function multiSeek(){
-        let keyWords=search.question.value;
-        document.querySelector("#hid span").innerHTML="";
-        seek();
-        let words=Array.from(search.question.value.split(" "));
-        if(words.length>1){
-          for (let word of words){
-            search.question.value=word;
-            seek()}
-        };
-        if(keyWords.length<3) {
-          document.querySelector("#hid span").innerHTML="<b>Извините, запрос слишком уж короткий!</b>"};
-        search.question.value=keyWords};
-      document.querySelector("#close").addEventListener("click", ()=>{
-                                                        container.style.display="none"}
-                                                       )
-    </script>
-  </body>
+</div>
+</body>
 </html>
