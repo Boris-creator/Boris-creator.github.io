@@ -61,14 +61,14 @@
          </div>   <!--Это конец блока с вариантами ответа.-->
                     <!--Вот здесь уже можно закончить форму, но подсказка семантически тоже относится к форме [?]-->
       <!-- === и подсказка ===-->
-      <div id="spoiler" style="display:none"> &#128276; $H4[$nq]</div>
+      <!--<div id="spoiler" style="display:none"> &#128276; $H4[$nq]</div>
       <button title="Закрыть/открыть" type="button" 
         style="border-radius:0.6em; color:#800000; background-color:#fefecc; border:0.2em solid #800000" 
         onclick="if(document.getElementById('spoiler') .style.display=='none')
         {document.getElementById('spoiler')
         .style.display=''}else{document.getElementById('spoiler')
         .style.display='none'}">Подсказка &#8597;
-        </button>
+        </button>-->
         </form>
       </div>
       <div style="width:35%; display:flex; align-items:center; /*простой способ разместить видео по центру*/padding:2em;">
@@ -78,6 +78,14 @@
            <source src="https://archive.org/download/WebmVp8Vorbis/webmvp8.webm" type="video/webm">
         </video>
       </div>
+      <div id="spoiler" style="display:none"> &#128276; $H4[$nq]</div>
+      <button title="Закрыть/открыть" type="button" 
+        style="border-radius:0.6em; color:#800000; background-color:#fefecc; border:0.2em solid #800000" 
+        onclick="if(document.getElementById('spoiler') .style.display=='none')
+        {document.getElementById('spoiler')
+        .style.display=''}else{document.getElementById('spoiler')
+        .style.display='none'}">Подсказка &#8597;
+        </button>
     </div>
     <div class="footer" style=" 
     background: rgba(242, 245, 58, 0.1); 
