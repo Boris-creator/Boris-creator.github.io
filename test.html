@@ -36,7 +36,7 @@
       </div>
     </div>  <!--Блока шапки конец-->
             <!--Блока средний    -->
-    <div  class="middle" style="background: rgba(243, 178, 58, 0.13); display:flex">
+    <div  class="middle" style="background: rgba(243, 178, 58, 0.13); display:flex; align-items:center">
       <div id="mi2" style="width:65%">
       <span id="mi1"    style="font-size:80%; color: #800000;"> 
         &#128161; Можно выбать один или несколько ответов. <br> 
@@ -61,23 +61,6 @@
          </div>   <!--Это конец блока с вариантами ответа.-->
                     <!--Вот здесь уже можно закончить форму, но подсказка семантически тоже относится к форме [?]-->
       <!-- === и подсказка ===-->
-      <div id="spoiler" style="display:none"> &#128276; $H4[$nq]</div>
-      <button title="Закрыть/открыть" type="button" 
-        style="border-radius:0.6em; color:#800000; background-color:#fefecc; border:0.2em solid #800000" 
-        onclick="if(document.getElementById('spoiler') .style.display=='none')
-        {document.getElementById('spoiler')
-        .style.display=''}else{document.getElementById('spoiler')
-        .style.display='none'}">Подсказка &#8597;
-        </button>
-        </form>
-      </div>
-      <div style="width:35%; margin-top:10vh; /*display:flex;*//*align-items:center;*/ /*простой способ разместить видео по центру*/padding:2em;">
-         <video  style="width:100%; box-shadow:-0.2em 0.2em 4em #222211; background-image:url('https://archive.org/download/WebmVp8Vorbis/webmvp8.gif'); background-size:cover/*гифка по размеру неточно соответствует видео, поэтому лучше сделать её фоном для видео.*/" controls autoplay poster="https://archive.org/download/WebmVp8Vorbis/webmvp8.gif" >
-           <source src="https://archive.org/download/WebmVp8Vorbis/webmvp8_512kb.mp4" type="video/mp4">
-           <source src="https://archive.org/download/WebmVp8Vorbis/webmvp8.ogv" type="video/ogg">
-           <source src="https://archive.org/download/WebmVp8Vorbis/webmvp8.webm" type="video/webm">
-        </video>
-      </div>
       <!--<div id="spoiler" style="display:none"> &#128276; $H4[$nq]</div>
       <button title="Закрыть/открыть" type="button" 
         style="border-radius:0.6em; color:#800000; background-color:#fefecc; border:0.2em solid #800000" 
@@ -86,6 +69,23 @@
         .style.display=''}else{document.getElementById('spoiler')
         .style.display='none'}">Подсказка &#8597;
         </button>-->
+        </form>
+      </div>
+      <!--<div style="width:35%; margin-top:10vh; /*display:flex;*//*align-items:center;*/ /*простой способ разместить видео по центру*/padding:2em;">-->
+         <video  style="width:35%; box-shadow:-0.2em 0.2em 4em #222211; background-image:url('https://archive.org/download/WebmVp8Vorbis/webmvp8.gif'); background-size:cover/*гифка по размеру неточно соответствует видео, поэтому лучше сделать её фоном для видео.*/" controls autoplay poster="https://archive.org/download/WebmVp8Vorbis/webmvp8.gif" >
+           <source src="https://archive.org/download/WebmVp8Vorbis/webmvp8_512kb.mp4" type="video/mp4">
+           <source src="https://archive.org/download/WebmVp8Vorbis/webmvp8.ogv" type="video/ogg">
+           <source src="https://archive.org/download/WebmVp8Vorbis/webmvp8.webm" type="video/webm">
+        </video>
+      <!--</div>-->
+      <div id="spoiler" style="display:none"> &#128276; $H4[$nq]</div>
+      <button title="Закрыть/открыть" type="button" 
+        style="border-radius:0.6em; color:#800000; background-color:#fefecc; border:0.2em solid #800000" 
+        onclick="if(document.getElementById('spoiler') .style.display=='none')
+        {document.getElementById('spoiler')
+        .style.display=''}else{document.getElementById('spoiler')
+        .style.display='none'}">Подсказка &#8597;
+        </button>
     </div>
     <div class="footer" style=" 
     background: rgba(242, 245, 58, 0.1); 
