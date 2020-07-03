@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>
+    </title>
+    <style>
+      body {
+        text-align: center;
+      }
+      #area {
+        display: flex;
+      }
+      #area div {
+        border: thin solid red;
+        min-height: 300px;
+      }
+      #prepl,
+      #prepr {
+        width: 20%;
+        flex-shrink: 0;
+      }
+      #test {
+        width: 60%;
+        flex-grow: 3;
+        flex-shrink: 0;
+      }
+      svg {
+        border: thin dotted silver;
+      }
+      #alert {
+        height: 1em;
+        padding: 0.7em;
+        border: thin solid silver;
+        text-align: center;
+      }
+      button, input{
+        border: thin solid gray;
+        padding: 1em 2em;
+      }
+      p {
+        text-align: justify;
+        padding: 3em;
+      }
+      #area button {
+        width: 90%;
+      }
+      #infoblock{
+        display:flex;
+        justify-content:space-around;
+        align-items:center;
+      }
+      #infoblock p{
+        width:30%;
+        flex-shrink:0;
+        height:1em;
+        padding:0.7em;
+        border:thin solid #880000
+      }
+      a{
+        color:#444477;
+        text-decoration:none;
+      }
+    </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    </script>
+    <script>
+      $(document).ready(function() {
+        /* $.ajax({ 
+        url: "svg.html",  
+        type: 'GET',
+        success: function(res){alert(res);//const params=res.split("
+        ").map(row=>row.split(","))
+        },
+        error: function(){alert("не удалось считать данные из таблицы.")}
+        });*/
+        let params;
+        $.ajax('rings.csv').done(data => {
+                                 /*alert(data.split(/\,/g));*/function group(n, arr){
+          return arr.reduce((acc, el, i)=>{
+                            if(i%n){
+            acc[acc.length-1].push(el)
+          }
+          else {
+            acc.push([el])
+          };
+          return acc
+        }
+        , [])
+      }; /*alert(data.split(/[^0-9a-z]/g).join("+"))*/params = group(2, group(8, data.split(/[\s\,]/g)));
+      $("#start").click(function (){
+        show(params);
+        this.style.display="none"}
+                       );
+      /*.join("---"); alert(params)*/
+      }
+      ).fail(function() {
+        alert('error');
+      }
+            );
+      const test = $("#test svg"), //центральное поле
+          left = $("#prepl svg"), //левое поле
+          right = $("#prepr svg"), //правое поле
+          alarm = $("#alert");
+      //alert(right.find(".stimul"));
+      //alert(right)
+      const buttons = [...document.querySelectorAll(".answer")];
+      //кнопки да/нет
+      /*---------------Управление юзера----------------*/
+      document.body.addEventListener("click", function (e) {
+        if (!e.target.closest(".answer")) {
+          return;
+        };
+        const answer = e.target.closest(".answer");
+        if (!answer.classList.contains("active")) {
+          console.log("no");
+          return;
+        }
+        if (Stimul.compare(stimul1, stimul2) == +answer.value) {
+          counterW++;
+          wins.push(1);
+          console.log("Правильно");
+          alarm.html("Правильно!");
+          setTimeout(() => {
+                     alarm.html("");
+        }
+        , 1000);
+      }
+                                     else {
+                                     counterL++;
+                                     wins.push(-1);
+      alarm.html("Ошибка!");
+      console.log("Неправильно");
+      setTimeout(() => {
+                 alarm.textContent = "";
+                 }
+                 , 1000);
+      }
+      clearTimeout(timer);
+      stimul2.clear(test);
+      bg2.clear(test);
+      const react_time = new Date();
+      time_res.push(+react_time - +time);
+      //console.log(time_res);
+      //console.log(+react_time- +time)
+      // next();
+      show(params);
+      //console.log(wins);
+      }
+      );
+      $('#subm').click(()=>{
+                       distance = parseInt(document.getElementById('distance').value) ? parseInt(document.getElementById('distance').value) : 500;
+      size=size*distance/500;
+      usersize=size;
+      }
+      )
+      /*-------------------конец управления юзера---------------------*/
+      let distance = 500;
+      let counter = 0, //счётчик ответов внутри цикла
+          counterS = 0, //счётчик циклов
+          end = false;
+      //флаг сигнализирует о конце испытания
+      let lastDir;
+      //последнее направление, чтобы не повторяться.
+      //функция рандомного выбора:
+      function random(arr, v){
+        const r = Math.floor(Math.random()*(arr.length-1));
+        return arr.filter(e=>e!==v)[r]
+      }
+      //функция рандома цвета или положения:
+      function randomize(n, min, max, v){
+        const s = n+n*v/100 >= max ? -1 : n-n*v/100 <= min ? 1 : (-1)**Math.floor(2*Math.random());
+        const r = Math.floor(n + s * n * Math.random() * v/100);
+        return r
+      };
+      /*----------------таймауты--------------*/
+      let timer;
+      let timerClear;
+      /*------------------------------*/
+      let time;
+      /*------------------------------------Размер стимула--------------------------------------*/
+      let size=1,
+          usersize=1;
+      /*--------------------------------------счетчики ответов----------------------------------*/
+      let fails=[0,0,0,0,0,0,0,0,0,0];
+      let counterW = 0,
+          counterL = 0,
+          counterN = 0;
+      const wins = [];
+      const time_res = [];
+      let stimul1, stimul2, bg1, bg2;
+      const   dirs=[0, 45, 90, 135, 180, 225, 270, 315];
+      //условные имена направлений прорези.
+      /*-----------------------Данные из таблицы------------------------------*/
+      /*let colors = [
+      [["0/127/127"], ["0/127/255", "255/0/0"]],
+      [["0/127/127"], ["0/127/255", "0/255/0"]],
+      [["0/127/127"], ["0/127/255", "255/255/0"]],
+      [["0/127/127"], ["0/255/255", "127/255/0"]],
+      [["0/127/127"], ["0/127/255", "127/255/0"]],
+      [["0/127/127"], ["0/127/255", "127/255/0"]],
+      [["0/255/127"], ["0/127/255", "127/255/0"]],
+      [["0/127/127"], ["0/127/255", "127/255/0"]],
+      [["0/127/127"], ["0/127/255", "127/255/0"]],
+      [["0/127/127"], ["0/127/255", "127/255/0"]],
+      [["0/127/127"], ["0/127/255", "127/255/0"]],
+      [["0/255/127"], ["0/127/255", "255/255/0"]],
+      [["0/127/127"], ["0/127/255", "127/255/0"]],
+      [["0/127/127"], ["0/127/255", "127/255/0"]],
+      [["0/127/127"], ["0/127/255", "127/255/0"]],
+      [["0/127/127"], ["0/127/255", "127/255/0"]]
+      ],
+      dirs=[0, 45, 90, 135, 180, 225, 270, 315],
+      places = [
+      "bl", "br", "c", "tl", "tr", "c", "tl", "tl", "bl", "br", "c", "tl", "tr", "c", "tl", "tl"
+      ],
+      intervals = [
+      [4, 6, 3],
+      [4, 6, 3],
+      [4, 6, 3],
+      [4, 6, 3]
+      ];*/
+      //Параметры фона:
+      class Bg {
+        constructor(color) {
+          this.color=color;
+          //this.color=color.split('/'); //старая версия
+        }
+        create(svg) {
+          const bg = svg.find(".background");
+          bg.attr("fill", this.setRandomColor());
+          console.log(bg.attr('fill'))
+          // bg.attr("width", 400);
+          // bg.attr("height", 300);
+        }
+        clear(svg) {
+          const bg = svg.find(".background");
+          bg.attr("fill", "transparent");
+          bg.attr("width", "744.09448819");
+          bg.attr("height", "744.3622047");
+        }
+        setRandomColor(){
+          return "rgba("+this.color.map(v=>randomize(+v, 0, 255, 7)).join(', ')+", 1)";
+        }
+      }
+      //кольцо:
+      class Stimul {
+        constructor(size, color, dir, c) {
+          this.size = size;
+          this.color=color;
+          //this.color=color.split('/'); //старый вариант
+          //this.color = "rgba("+color.split('/').join(', ')+", 1)";
+          this.dir = dir;
+          const w = 744.09448819,
+              h = 744.3622047;
+          this.placeX = randomize(600, -100*this.size, w-100*this.size, 50)-600;
+          this.placeY = randomize(600, -100*this.size, h-100*this.size, 50)-600;
+          //alert(this.placeX+" "+this.placeY);
+          //alert(w-20*this.size)
+          /*this.placeX = c =="bl" || c =="tl" ? randomize(Math.max(100, size*1.6), size*1.5, 360, 9) : c == "c" ? randomize(200, 0, 360, 9) : randomize(Math.min(350, 400-size*1.6), 0, 400-size*1.3, 9);
+          this.placeY = c =="tl" || c =="tr" ? randomize(Math.max(100, size*1.6), size*1.3, 300, 9) : c == "c" ? randomize(150, 0, 360, 9) : randomize(Math.min(220, 300-size*2), size*1.5, 300, 9);*/
+        }
+        setRandomColor(){
+          return "rgba("+this.color.map(v=>randomize(+v, 0, 255, 7)).join(', ')+", 1)";
+        }
+        create(svg) {
+          const stimul = $(document.createElementNS("http://www.w3.org/2000/svg", "path"));
+          stimul.attr("cx", this.placeX);
+          stimul.attr("cy", this.placeY);
+          stimul.attr("d", "M -528.17773,169.97852 A 176.66841,176.66841 0 0 0 -701.0625,311.21484 l 79.90234,0 a 103.54649,103.54649 0 0 1 97.15625,-68.11328 103.54649,103.54649 0 0 1 103.54688,103.54492 103.54649,103.54649 0 0 1 -103.54688,103.54883 103.54649,103.54649 0 0 1 -97.20312,-68.11523 l -80.03125,0 a 176.66841,176.66841 0 0 0 173.06055,141.23633 176.66841,176.66841 0 0 0 176.66796,-176.66993 176.66841,176.66841 0 0 0 -176.66796,-176.66796 ");
+          stimul.attr("stroke-width", "0.99351662");
+          stimul.attr("fill-rule", "evenodd");
+          stimul.attr("fill", this.setRandomColor());
+          stimul.css({
+            "stroke-linecap":"butt", "stroke-linejoin":"miter", "stroke-opacity":"1", "fill-opacity":"1"}
+                    );
+          stimul.attr("transform","translate("+(-896.29154+744.09448819/2)+" "+ (-31.74396+774.3622047/2)+")  scale("+this.size+") translate("+(896.29154-744.09448819/2)+" "+(31.74396-774.3622047/2)+") rotate("+this.dir+" "+(-896.29154+744.09448819/2)+" "+(-31.74396+774.3622047/2)+") translate("+this.placeX+" "+this.placeY+")");
+          //stimul.attr("id", "ring");
+          svg.find(".stimul").append(stimul);
+        }
+        clear(svg) {
+          const stimul = svg.find("path");
+          stimul.remove()
+        }
+        static compare(s1, s2) {
+          return s1.dir == s2.dir ? true : false;
+        }
+      };
+      const test1= new Stimul(1, colors[counter][0][0],
+                              random(dirs, lastDir),
+                              "c");
+      test1.create(test);
+      //тестовый запуск
+      //alert(test.find('.stimul').attr('stroke'))
+      /*-------------------Основная функция------------------*/
+      function show(parameters){
+        console.log("counter "+counter);
+        console.log(counterS*4+counter);
+        if(end){
+          return};
+        for(let b of document.querySelectorAll('.answer')){
+          b.classList.remove('active')
+        };
+        //if(!distance){calc(); return};  
+        if(/*(counter)%4==0 && counter!==0*/counter==4){
+          //if(counterS>=3){alert("Испытание завершено."); end=true;return};
+          counter=0;
+          if(counterW>=3){
+            counterS++;
+            if(counterS==4){
+              alert("Испытание завершено. У Вас хороший результат.");
+              end=true;
+              return}
+          }
+          else{
+            fails[counterS]=fails[counterS]+1;
+            alert('В серии меньше 3 верных ответов.');
+            if(fails[counterS]==2){
+              end=true;
+              alert('Испытание закончено!');
+              clearTimeout(timer);
+              clearTimeout(timerClear);
+              return;
+            };
+            counterS=Math.max(counterS-1, 0);
+            //sharpness= sharpness == 0 ? 0 : (+sharpness-0.1).toFixed(1);
+            //counterS=Math.max(counterS-1, 0)
+          };
+          counterW=0;
+          //size=usersize/(counter_series+1)
+        };
+        size = usersize/(counterS+1);
+        $('#countSeries').html("Текущая серия: "+(counterS+1));
+        //sharpness = counter_series/10; //выставляю остроту
+        //-----------отрисовка стимула---------------------------------//
+        //alert(counterS);
+        const prs=parameters[counterS*4+counter];
+        const circ = new Stimul(
+          1,
+          [prs[0][0], prs[0][1], prs[0][2]],
+          random(dirs, lastDir),
+          "c"
+        );
+        //const rect = new Bg(bgcolors[0][counterS][counter]);
+        stimul1 = circ;
+        //bg1 = rect;
+        const field = [left, right][Math.floor(Math.random() * 2)];
+        circ.create(field);
+        timerClear = setTimeout(()=>{
+                                //убираю кольцо сбоку и добавляю по центру:
+                                circ.clear(field);
+        for(let b of document.querySelectorAll('.answer')){
+          b.classList.add('active')
+        };
+        //теперь можно отвечать
+        const circ2 = new Stimul(
+          size/(counterS+1), [prs[1][3], prs[1][4], prs[1][5]], random(dirs, lastDir), prs[1][6]
+        );
+        const rect2 = new Bg([prs[1][0], prs[1][1], prs[1][2]]);
+        stimul2 = circ2;
+        bg2 = rect2;
+        rect2.create(test);
+        circ2.create(test);
+        counter++;
+        if(counterS<4){
+          timer =  setTimeout(()=>{
+                              //очищаю оба поля и перехожу к следующей итерации:
+                              counterN++;
+                              wins.push(0);
+          alarm.html("Проморгал!");
+          setTimeout(() => {
+                     alarm.html("");
+        }
+        , 500);
+        stimul2.clear(test);
+        bg2.clear(test);
+        //next(); не нужна
+        show(parameters);
+      }
+      , 2000)}
+      }
+      , 2000)
+      //rect2.create(test);
+      //------------конец отрисовки стимула---------------------//
+      if(counterS==4){
+        clearTimeout(timer);
+        clearTimeout(timerClear);
+        end=true;
+        alert('Всё! Испытание закончено.');
+        //save();
+        //---------здесь надо сделать кнопки неактивными---------//
+      }
+      };
+      /**/
+      //это надо будет вырезать:
+      function next() {
+        stimul2.clear(test);
+        //bg2.clear(test);
+        /*if (count < intervals[0].length - 1) {
+        count++;
+        } else if (countS < intervals.length - 1) {
+        countS++;
+        count = 0;
+        } else {
+        end = true;
+        }*/
+      }
+      function adaptTime(results, n) {
+        if (results.length < intervals[0].length) {
+          return 0;
+        }
+        const arr = results.slice(results.length - n).filter((r) => r == 1);
+        return +(arr.length < 2);
+      }
+      function save() {
+        localStorage.wins = wins;
+        localStorage.time_res = time_res;
+        // alert(localStorage.wins);
+        /*$.ajax({
+        url: 'back.php',
+        type: 'POST',
+        dataType: "json", 
+        //: "jsonData="+JSON.stringify(localStorage.results)
+        data: "jsonData=" + JSON.stringify(
+        {wins:localStorage.wins,
+        time_res:localStorage.time_res
+        }
+        ),
+        success: function(res) {
+        //alert(res.a+"-"+res.b+ "-"+res.c);
+        alert(res);
+        }
+        }); */ 
+      };
+      //show()
+      //$("#start").click(function (){show(); this.style.display="none"});
+      /*$.ajax({ url: "rings.csv",  type: 'GET',success: function(res){alert(res);//const params=res.split("
+      ").map(row=>row.split(","))},error: function(){alert("не удалось считать данные из таблицы.")},});*/
+      }
+      ) //end ready
+    </script>
+  </head>
+  <body>
+    <input id="distance" placeholder="Расстояние в см">
+    <button id="subm">
+      подтведить
+    </button>
+    <div id="infoblock">
+      <p id="countSeries">
+        Номер текущей серии
+      </p>
+      <p id="alert">
+        Подсказка
+      </p>
+    </div>
+    <div id="area">
+      <div id="prepl">
+        <svg viewBox="0 0 744.09448819 744.3622047" preserveAspectRatio="xMinYMin meet">
+          <g>
+            <rect class="background" x="0" y="0" width="744.09448819" height="744.3622047" fill="transparent" />
+          </g>
+          <g class="stimul" transform="translate(896.29154,31.74396)">
+            <!--<path class="stimul" d="" style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.99351662px; stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />-->
+          </g>
+        </svg>
+        <button class="answer" value="0">
+          Нет
+        </button>
+      </div>
+      <div id="test">
+        <svg viewBox="0 0 744.09448819 744.3622047" preserveAspectRatio="xMinYMin meet">
+          <g>
+            <rect id="background" class="background" x="0" y="0" width="744.09448819" height="744.3622047" fill="transparent" />
+          </g>
+          <g class="stimul" transform="translate(896.29154,31.74396)">
+            <!--<path class="stimul" d="" style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.99351662px; stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />-->
+          </g>
+        </svg>
+      </div>
+      <div id="prepr">
+        <svg viewBox="0 0 744.09448819 744.3622047" preserveAspectRatio="xMinYMin meet">
+          <g>
+            <rect class="background" x="0" y="0" width="744.09448819" height="744.3622047" fill="transparent" />
+          </g>
+          <g class="stimul" transform="translate(896.29154,31.74396)">
+            <!--<path class="stimul" d="" style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.99351662px; stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />-->
+          </g>
+        </svg>
+        <button class="answer" value="1">
+          Да
+        </button>
+      </div>
+    </div>
+    <button id="start">
+      Старт
+    </button>
+    <p style="font-size:1.2em; line-height:1.6em; padding:2em;">
+      Таблица, из которой выводятся данные, здесь: 
+      <a href="rings.csv">
+        rings.csv
+      </a>
+      . Под каждое предъявление стимула две строчки: в первой данные о цвете кольца в боковом поле, во второй данные о цвете фона и стимула в центральном поле, а также условное обозначение положения кольца (на его основе получаю рандомные координаты): "br" (от "bottom right") означает в правом нижнем углу, "c" означает по центру и т. д.
+    </p>
+  </body>
+</noscript>
+<div style="text-align: center;">
+  <div style="position:relative; top:0; margin-right:auto;margin-left:auto; z-index:99999">
+  </div>
+</div>
+</html>
