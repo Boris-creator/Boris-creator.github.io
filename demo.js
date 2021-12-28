@@ -40,17 +40,19 @@ async function checkProperties() {
 }
 
 async function getContacts() {
-  const props = [];
+  const props = ['name', 'email', 'tel', 'address', 'icon'];
+  /*
   if (cbName.checked) props.push('name');
   if (cbEmail.checked) props.push('email');
   if (cbTel.checked) props.push('tel');
   if (cbAddress.checked) props.push('address');
   if (cbIcon.checked) props.push('icon');
-  
-  const opts = {multiple: cbMultiple.checked};
+  */
+  const opts = {multiple: true};
   
   try {
     const contacts = await navigator.contacts.select(props, opts);
+    alert(JSON.stringify(contacts))
     handleResults(contacts);
   } catch (ex) {
     ulResults.classList.toggle('error', true);
